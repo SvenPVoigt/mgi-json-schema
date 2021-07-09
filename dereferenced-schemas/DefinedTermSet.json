@@ -127,6 +127,28 @@
                 }
             }
         },
+        "potentialAction": {
+            "type": "object",
+            "description": "A method that this object can execute. A simple call method would allow this object to be callable in some interpreted languages and act like a function.",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the method to be called"
+                },
+                "language": {
+                    "type": "string",
+                    "description": "the language the code is to be executed in."
+                },
+                "code": {
+                    "type": "string",
+                    "description": "A string representation of the code"
+                },
+                "codePayloadName": {
+                    "type": "string",
+                    "description": "If code is attached as a payload, then this specifies the codes name."
+                }
+            }
+        },
         "about": {
             "type": "array",
             "title": "About",

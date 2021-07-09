@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "title": "MaterialStructure",
+    "description": "A MaterialStructure describes the physical elements that compose a material. These can be phases, other materials, atoms, etc. MaterialStructure files can be images, arrays, pointclouds, etc. or they can be descriptive features such as volume fractions.",
+    "required": [
+        "@id",
+        "@context",
+        "@type"
+    ],
+    "allOf": [
+        {
+            "@context": {
+                "type": "array",
+                "default": [
+                    "http://schema.org/",
+                    {
+                        "mat": "https://pages.nist.gov/material-schema/",
+                        "parameterControlled": "mat:parameterControlled"
+                    }
+                ]
+            },
+            "@type": {
+                "type": "array",
+                "default": [
+                    "Dataset",
+                    "mat:MaterialStructure"
+                ]
+            }
+        },
+        {"$ref": "definition-schemas/CordraObjectID.json#/definitions/CordraObjectID"},
+        {"$ref": "definition-schemas/Thing.json#/definitions/Thing"},
+        {"$ref": "definition-schemas/CreativeWork.json#/definitions/CreativeWork"},
+        {"$ref": "definition-schemas/MaterialStructure.json#/definitions/MaterialStructure"}
+    ]
+}

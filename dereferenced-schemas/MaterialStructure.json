@@ -1,8 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
-    "title": "Form",
-    "description": "This schema is for depositing and describing a UI Form definition in Cordra.",
+    "title": "MaterialStructure",
+    "description": "A MaterialStructure describes the physical elements that compose a material. These can be phases, other materials, atoms, etc. MaterialStructure files can be images, arrays, pointclouds, etc. or they can be descriptive features such as volume fractions.",
     "required": [
         "@id",
         "@context",
@@ -335,6 +335,25 @@
                 }
             }
         },
+        "processLinked": {
+            "type": "array",
+            "title": "Processes",
+            "description": "Link to a ProcessHistory (see ProcessHistory for its description). This link is used when information about a process has been gathered and needs to be associated with the process to describe it. It is also used to reference a ProcessHistory by a Material.",
+            "uniqueItems": true,
+            "items": {
+                "type": "string",
+                "title": "ProcessHistory",
+                "cordra": {
+                    "type": {
+                        "handleReference": {
+                            "types": [
+                                "ProcessHistory"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
         "includedInDataCatalog": {
             "type": "array",
             "title": "Included In Data Catalogs",
@@ -348,33 +367,6 @@
                             "types": [
                                 "DataCatalog"
                             ]
-                        }
-                    }
-                }
-            }
-        },
-        "DataDownload": {
-            "type": "object",
-            "title": "Distribution",
-            "properties": {
-                "@type": {
-                    "type": "string",
-                    "default": "DataDownload"
-                },
-                "contentUrl": {
-                    "type": "string",
-                    "title": "Content URL"
-                },
-                "encodingFormat": {
-                    "type": "string",
-                    "title": "Data Type",
-                    "cordra": {
-                        "type": {
-                            "handleReference": {
-                                "types": [
-                                    "DataFormat"
-                                ]
-                            }
                         }
                     }
                 }
@@ -396,7 +388,7 @@
             "type": "array",
             "default": [
                 "Dataset",
-                "mat:Form"
+                "mat:MaterialStructure"
             ]
         },
         "@id": {
@@ -816,17 +808,49 @@
                 }
             }
         },
+        "lengthScale": {
+            "title": "Structure Length Scale",
+            "description": "A qualitative description of the length scale at which the structure is defined. Could be atomic, microscale, mesoscale, etc. QUantitative measurements are given in dimensions.",
+            "type": "string"
+        },
+        "dimensions": {
+            "title": "Dimensions of Structure",
+            "description": "Dimensions are applicable if there is a measurement taken over some defined length, area, or volume. Accepted is an array of Quantitative Values that need not necessarily be constrained to 3 dimensions (i.e. 3 spatial dimensions + 3 euler angles = 6 dimensions). Units of the Quantitative Value do not accept the axis. Dimensions matching the order of dimensions in attached payloads are prefered. See more about Quantitative Values at <href a=#/QuantitativeValue>.",
+            "type": "array",
+            "items": {
+                "title": "Dimension",
+                "$ref": "#/definitions/PropertyValue"
+            }
+        },
+        "includedInDataCatalog": {
+            "$ref": "#/definitions/includedInDataCatalog"
+        },
+        "material": {
+            "title": "Material",
+            "$ref": "#/definitions/materialLinked"
+        },
+        "materialExtent": {
+            "title": "Material Quantity",
+            "$ref": "#/definitions/QuantitativeValue"
+        },
+        "materialReference": {
+            "title": "Reference Material",
+            "$ref": "#/definitions/materialLinked"
+        },
+        "materialReferenceExtent": {
+            "title": "Reference Material Quantity",
+            "$ref": "#/definitions/QuantitativeValue"
+        },
+        "process": {
+            "title": "Reference Process",
+            "$ref": "#/definitions/processLinked"
+        },
         "measurementTechnique": {
             "$ref": "#/definitions/measurementTechnique"
         },
         "variableMeasured": {
-            "type": "array",
-            "title": "Variables Measured",
-            "uniqueItems": true,
-            "items": {
-                "title": "Variable Measured",
-                "$ref": "#/definitions/PropertyValue"
-            }
+            "title": "Material Property",
+            "$ref": "#/definitions/PropertyValue"
         },
         "parameterControlled": {
             "type": "array",
@@ -845,33 +869,6 @@
                 "title": "Condition Observed",
                 "$ref": "#/definitions/PropertyValue"
             }
-        },
-        "material": {
-            "title": "Material",
-            "$ref": "#/definitions/materialLinked"
-        },
-        "materialExtent": {
-            "title": "Material Quantity",
-            "$ref": "#/definitions/QuantitativeValue"
-        },
-        "materialReference": {
-            "title": "Reference Material",
-            "$ref": "#/definitions/materialLinked"
-        },
-        "materialReferenceExtent": {
-            "title": "Reference Material Quantity",
-            "$ref": "#/definitions/QuantitativeValue"
-        },
-        "includedInDataCatalog": {
-            "$ref": "#/definitions/includedInDataCatalog"
-        },
-        "uploadDate": {
-            "title": "Upload Date",
-            "description": "A date value in ISO 8601 date format, e.g.: YYYY-MM-DD, YYYY-MM-DDThh:mm:ssTZD",
-            "type": "string"
-        },
-        "distribution": {
-            "$ref": "#/definitions/DataDownload"
         },
         "hasPart": {
             "$ref": "#/definitions/hasPart"

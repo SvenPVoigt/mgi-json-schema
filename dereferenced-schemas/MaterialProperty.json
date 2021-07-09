@@ -266,24 +266,6 @@
                 }
             }
         },
-        "includedInDataCatalog": {
-            "type": "array",
-            "title": "Included In Data Catalogs",
-            "uniqueItems": true,
-            "items": {
-                "type": "string",
-                "title": "Included In Data Catalog",
-                "cordra": {
-                    "type": {
-                        "handleReference": {
-                            "types": [
-                                "DataCatalog"
-                            ]
-                        }
-                    }
-                }
-            }
-        },
         "isPartOf": {
             "type": "array",
             "title": "Is Part Of",
@@ -347,6 +329,43 @@
                                 "TabularDataPackage",
                                 "SoftwareApplication",
                                 "SoftwareSourceCode"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "processLinked": {
+            "type": "array",
+            "title": "Processes",
+            "description": "Link to a ProcessHistory (see ProcessHistory for its description). This link is used when information about a process has been gathered and needs to be associated with the process to describe it. It is also used to reference a ProcessHistory by a Material.",
+            "uniqueItems": true,
+            "items": {
+                "type": "string",
+                "title": "ProcessHistory",
+                "cordra": {
+                    "type": {
+                        "handleReference": {
+                            "types": [
+                                "ProcessHistory"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "includedInDataCatalog": {
+            "type": "array",
+            "title": "Included In Data Catalogs",
+            "uniqueItems": true,
+            "items": {
+                "type": "string",
+                "title": "Included In Data Catalog",
+                "cordra": {
+                    "type": {
+                        "handleReference": {
+                            "types": [
+                                "DataCatalog"
                             ]
                         }
                     }
@@ -479,6 +498,28 @@
                             "types": []
                         }
                     }
+                }
+            }
+        },
+        "potentialAction": {
+            "type": "object",
+            "description": "A method that this object can execute. A simple call method would allow this object to be callable in some interpreted languages and act like a function.",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the method to be called"
+                },
+                "language": {
+                    "type": "string",
+                    "description": "the language the code is to be executed in."
+                },
+                "code": {
+                    "type": "string",
+                    "description": "A string representation of the code"
+                },
+                "codePayloadName": {
+                    "type": "string",
+                    "description": "If code is attached as a payload, then this specifies the codes name."
                 }
             }
         },
@@ -767,6 +808,11 @@
                 }
             }
         },
+        "propertyCategory": {
+            "title": "Property Category",
+            "description": "The type of property being discussed. Could be mechanical, thermal, electrical, chemical, etc.",
+            "type": "string"
+        },
         "includedInDataCatalog": {
             "$ref": "#/definitions/includedInDataCatalog"
         },
@@ -785,6 +831,10 @@
         "materialReferenceExtent": {
             "title": "Reference Material Quantity",
             "$ref": "#/definitions/QuantitativeValue"
+        },
+        "process": {
+            "title": "Reference Process",
+            "$ref": "#/definitions/processLinked"
         },
         "measurementTechnique": {
             "$ref": "#/definitions/measurementTechnique"
