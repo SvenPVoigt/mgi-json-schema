@@ -1,14 +1,23 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
-    "title": "MaterialProperty",
-    "definitions": {"MaterialProperty": {
+    "title": "MaterialStructure",
+    "definitions": {"MaterialStructure": {
         "type": "object",
         "properties": {
-            "propertyCategory": {
-                "title": "Property Category",
-                "description": "The type of property being discussed. Could be mechanical, thermal, electrical, chemical, etc.",
+            "lengthScale": {
+                "title": "Structure Length Scale",
+                "description": "A qualitative description of the length scale at which the structure is defined. Could be atomic, microscale, mesoscale, etc. QUantitative measurements are given in dimensions.",
                 "type": "string"
+            },
+            "dimensions": {
+                "title": "Dimensions of Structure",
+                "description": "Dimensions are applicable if there is a measurement taken over some defined length, area, or volume. Accepted is an array of Quantitative Values that need not necessarily be constrained to 3 dimensions (i.e. 3 spatial dimensions + 3 euler angles = 6 dimensions). Units of the Quantitative Value do not accept the axis. Dimensions matching the order of dimensions in attached payloads are prefered. See more about Quantitative Values at <href a=#/QuantitativeValue>.",
+                "type": "array",
+                "items": {
+                    "title": "Dimension",
+                    "$ref": "PropertyValue.json#/definitions/PropertyValue"
+                }
             },
             "includedInDataCatalog": {"$ref": "includedInDataCatalog.json#/definitions/includedInDataCatalog"},
             "material": {

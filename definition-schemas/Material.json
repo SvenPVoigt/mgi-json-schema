@@ -21,6 +21,7 @@
             "isSupplyFor": {
                 "type": "array",
                 "title": "This Material is a Supply/Starting Material for this Process",
+                "description": "This Material is a Supply/Starting Material for this Process",
                 "uniqueItems": true,
                 "items": {
                     "title": "Process",
@@ -33,6 +34,7 @@
             },
             "isPartOf": {
                 "title": "Has Parent Materials and Collections",
+                "description": "This material may be a phase or component of a multiphase or composite material. Each material it is a part of is to be referenced here.",
                 "type": "array",
                 "items": {
                     "title": "Has Parent Materialor Collection",
@@ -45,6 +47,7 @@
             },
             "hasPart": {
                 "title": "Has Child Materials",
+                "description": "This material may be a multiphase or composite material. Each phase or component that is a material is to be referenced here.",
                 "type": "array",
                 "items": {
                     "title": "Has Child Material",

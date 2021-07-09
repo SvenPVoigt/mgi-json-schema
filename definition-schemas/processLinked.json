@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "title": "processLinked",
+    "definitions": {"processLinked": {
+        "type": "array",
+        "title": "Processes",
+        "description": "Link to a ProcessHistory (see ProcessHistory for its description). This link is used when information about a process has been gathered and needs to be associated with the process to describe it. It is also used to reference a ProcessHistory by a Material.",
+        "uniqueItems": true,
+        "items": {
+            "type": "string",
+            "title": "ProcessHistory",
+            "cordra": {"type": {"handleReference": {"types": ["ProcessHistory"]}}}
+        }
+    }}
+}
